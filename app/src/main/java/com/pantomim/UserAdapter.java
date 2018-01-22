@@ -15,8 +15,10 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>  {
 
     private boolean imHost;
+    private WinnerInterface winner;
     private List<User> parent = new ArrayList<User>();
-    public UserAdapter (List<User> parent, boolean imHost) {
+    public UserAdapter (List<User> parent, boolean imHost, WinnerInterface winner) {
+        this.winner = winner;
         this.parent = parent;
         this.imHost = imHost;
     }
@@ -24,9 +26,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         CardView card;
+        View view;
         public MyViewHolder(View view ) {
             super(view);
             card = (CardView) view.findViewById(R.id.card);
+            this.view = view;
         }
     }
     @Override
@@ -53,6 +57,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             }
         });
         item.setCard(holder.card);
+        if(imHost)
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    winner.selectWinner(item.getUserId());
+                }
+            });
     }
 
     @Override

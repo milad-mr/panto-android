@@ -1,6 +1,8 @@
 package com.pantomim;
 
 import android.opengl.GLSurfaceView;
+import android.os.CountDownTimer;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,9 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.webrtc.MediaConstraints;
 import org.webrtc.PeerConnectionFactory;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChooseInterface,StartInterface,WinnerInterface {
     private List<Chat> chats = new ArrayList<Chat>();
     private List<User> users = new ArrayList<User>();
     private User myUser;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private ChatAdapter chatAdapter;
     private boolean imHost = true;
     private boolean isVoice = false;
+    private ProgressBar progressBar;
+    private int timerSec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +46,13 @@ public class MainActivity extends AppCompatActivity {
         GLSurfaceView videoView = (GLSurfaceView) findViewById(R.id.video);
         RecyclerView rChat = (RecyclerView) findViewById(R.id.chats);
         RecyclerView rUser = (RecyclerView) findViewById(R.id.users);
+        progressBar = (ProgressBar) findViewById(R.id.timer);
         ImageView send = (ImageView) findViewById(R.id.send);
         final ImageView microphone = (ImageView) findViewById(R.id.voice);
         final EditText edit = (EditText) findViewById(R.id.text);
 
 
-        userAdapter = new UserAdapter(users,imHost);
+        userAdapter = new UserAdapter(users,imHost,this);
         chatAdapter = new ChatAdapter(chats);
         final LinearLayoutManager mManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         rUser.setAdapter(userAdapter);
@@ -120,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
         userAdapter.notifyDataSetChanged();
         //
         generateUser();
+        resetTimer();
+        setChooseMode();
 
     }
 
@@ -144,5 +152,68 @@ public class MainActivity extends AppCompatActivity {
         addUser(user);
         user = myUser = new User("KIA",1,16,chatAdapter);
         addUser(user);
+    }
+
+    public void resetTimer(){
+        timerSec = 0;
+        CountDownTimer mCountDownTimer=new CountDownTimer(60000,1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerSec++;
+                progressBar.setProgress(timerSec);
+
+            }
+
+            @Override
+            public void onFinish() {
+                timerSec++;
+                progressBar.setProgress(60);
+                timerEnd();
+            }
+        };
+        mCountDownTimer.start();
+    }
+
+    public void timerEnd(){
+        //TODO: MILAD : vaghti timer tamom shod ino var boro
+    }
+
+    @Override
+    public void choose(String text){
+        resetTimer();
+        showWord(text);
+    }
+
+    @Override
+    public void start(){
+        resetTimer();
+    }
+    //show Word to another
+    public void showWord(String text){
+        if(imHost)
+            Toast.makeText(this,text,Toast.LENGTH_LONG).show();
+    }
+    //For starting
+    public void setStartMode(){
+        DialogStart dFragment = new DialogStart ();
+        dFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        dFragment.show(getSupportFragmentManager(), null);
+        dFragment.init(this);
+    }
+    //For choosing
+    public void setChooseMode(){
+        DialogChoose dFragment = new DialogChoose ();
+        dFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        dFragment.show(getSupportFragmentManager(), null);
+        dFragment.init(this);
+    }
+
+    //selecting winner
+    @Override
+    public void selectWinner(int id){
+        //add score to user
+        resetTimer();
+
     }
 }

@@ -24,6 +24,7 @@
       <ProgressBar
           android:layout_marginTop="1dp"
           android:progress="10"
+          android:id="@+id/timer"
           android:max="60"
           style="?android:attr/progressBarStyleHorizontal"
           android:layout_width="match_parent"
