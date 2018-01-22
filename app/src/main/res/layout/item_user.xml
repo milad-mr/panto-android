@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_vertical"
+    android:layout_height="80dp"
+    android:layout_width="80dp"
+    card_view:cardElevation="2dp"
+    android:id="@+id/card"
+    app:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            android:id="@+id/microphone"
+            android:src="@drawable/ic_microphone"
+            android:layout_height="20dp" />
+        <LinearLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:text="23"
+                android:id="@+id/score"
+                android:textColor="#FFCB29"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:text="aryahm"
+                android:id="@+id/name"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

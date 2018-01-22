@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="4dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="4dp"
+    tools:context="com.pantomim.MainActivity">
+   <LinearLayout
+       android:id="@+id/activity_main"
+       android:layout_above="@+id/manage"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:weightSum="8">
+      <android.opengl.GLSurfaceView
+          android:id="@+id/video"
+          android:layout_weight="4"
+          android:layout_width="match_parent"
+          android:layout_height="0dp" />
+      <ProgressBar
+          android:layout_marginTop="1dp"
+          android:progress="10"
+          android:max="60"
+          style="?android:attr/progressBarStyleHorizontal"
+          android:layout_width="match_parent"
+          android:layout_height="10dp" />
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/users"
+          android:gravity="center"
+          android:layout_width="match_parent"
+          android:layout_weight="2"
+          android:layout_height="0dp"/>
+      <android.support.v7.widget.RecyclerView
+          android:layout_marginTop="6dp"
+          android:id="@+id/chats"
+          android:layout_weight="2"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"/>
+   </LinearLayout>
+   <RelativeLayout
+       android:gravity="bottom"
+       android:layout_alignParentBottom="true"
+       android:id="@+id/manage"
+       android:layout_width="wrap_content"
+       android:orientation="horizontal"
+       android:layout_height="40dp">
+      <ImageView
+          android:layout_width="wrap_content"
+          android:id="@+id/voice"
+          android:layout_alignParentRight="true"
+          android:src="@drawable/ic_microphone"
+          android:layout_height="wrap_content" />
+      <ImageView
+          android:layout_width="wrap_content"
+          android:id="@+id/send"
+          android:layout_toLeftOf="@+id/voice"
+          android:src="@android:drawable/ic_menu_send"
+          android:layout_height="wrap_content" />
+      <EditText
+          android:layout_width="match_parent"
+          android:id="@+id/text"
+          android:layout_toLeftOf="@+id/send"
+          android:layout_height="wrap_content" />
+   </RelativeLayout>
+</RelativeLayout>
+
