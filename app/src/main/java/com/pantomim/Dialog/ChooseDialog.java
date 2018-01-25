@@ -1,4 +1,4 @@
-package com.pantomim;
+package com.pantomim.Dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -8,35 +8,37 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.pantomim.Interface.ChooseInterface;
+import com.pantomim.R;
+
+
 /**
- * Created by aryahm on 1/26/18.
+ * Created by aryahm on 1/23/18.
  */
 
-public class LoginDialog extends DialogFragment {
+public class ChooseDialog extends DialogFragment {
     ViewGroup rootView;
-    LoginInterface   set;
+    ChooseInterface set;
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(
-                R.layout.alert_login, container, false);
+                R.layout.alert_choose, container, false);
+        setCancelable(false);
         run();
         return rootView;
     }
 
-    public void init(final LoginInterface set){
-        this.set = set;
+    public void init(final ChooseInterface set){
+        this.set=set;
     }
 
     public void run(){
-        Button button = (Button)rootView.findViewById(R.id.login);
-        final EditText password = (EditText) rootView.findViewById(R.id.password);
-        final EditText username = (EditText) rootView.findViewById(R.id.username);
-
+        Button button = (Button)rootView.findViewById(R.id.choose);
+        final EditText text = (EditText) rootView.findViewById(R.id.text);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                set.onLogin(username.getText().toString(),
-                        password.getText().toString());
+                set.choose(text.getText().toString());
                 dismiss();
 
             }

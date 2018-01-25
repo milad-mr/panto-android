@@ -1,10 +1,15 @@
-package com.pantomim;
+package com.pantomim.Adapter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.pantomim.Interface.WinnerInterface;
+import com.pantomim.Model.User;
+import com.pantomim.R;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,6 @@
-package com.pantomim;
+package com.pantomim.Activity;
 
+import android.content.Intent;
 import android.opengl.GLSurfaceView;
 import android.os.CountDownTimer;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +15,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.pantomim.Adapter.ChatAdapter;
+import com.pantomim.Interface.ChooseInterface;
+import com.pantomim.DataManager;
+import com.pantomim.Dialog.ChooseDialog;
+import com.pantomim.Model.Chat;
+import com.pantomim.Model.User;
+import com.pantomim.R;
+import com.pantomim.Dialog.StartDialog;
+import com.pantomim.Interface.StartInterface;
+import com.pantomim.Adapter.UserAdapter;
+import com.pantomim.Interface.WinnerInterface;
 
 import org.webrtc.MediaConstraints;
 import org.webrtc.PeerConnectionFactory;
@@ -34,10 +47,12 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,S
     private User myUser;
     private UserAdapter userAdapter;
     private ChatAdapter chatAdapter;
-    private boolean imHost = true;
+    private boolean imHost = false;
     private boolean isVoice = false;
     private ProgressBar progressBar;
     private int timerSec;
+    private String ownerName;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +66,11 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,S
         final ImageView microphone = (ImageView) findViewById(R.id.voice);
         final EditText edit = (EditText) findViewById(R.id.text);
 
-
+        Intent intent = getIntent();
+        ownerName = intent.getStringExtra("owner_name");
+        id = Integer.parseInt(intent.getStringExtra("id"));
+        if(ownerName.equals(DataManager.getUsername(this)))
+            imHost = true;
         userAdapter = new UserAdapter(users,imHost,this);
         chatAdapter = new ChatAdapter(chats);
         final LinearLayoutManager mManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
@@ -203,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,S
     }
     //For choosing
     public void setChooseMode(){
-        DialogChoose dFragment = new DialogChoose ();
+        ChooseDialog dFragment = new ChooseDialog();
         dFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         dFragment.show(getSupportFragmentManager(), null);
         dFragment.init(this);
@@ -214,6 +233,20 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,S
     public void selectWinner(int id){
         //add score to user
         resetTimer();
+
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        for (int i = 0 ;i<users.size(); i++){
+            if(users.get(i).getName().equals(ownerName))
+                setNewScore(users.get(i).getScore());
+        }
+    }
+
+    public void setNewScore(int score){
+        int mScore = DataManager.getScore(this);
+        DataManager.setScore(this,mScore + score);
 
     }
 }

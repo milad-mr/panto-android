@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pantomim</string>
+    <string name="perfer_key">PantomimPrefer</string>
 </resources>

@@ -8,7 +8,7 @@
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
     android:paddingTop="4dp"
-    tools:context="com.pantomim.MainActivity">
+    tools:context="com.pantomim.Activity.MainActivity">
    <LinearLayout
        android:id="@+id/activity_main"
        android:layout_above="@+id/manage"

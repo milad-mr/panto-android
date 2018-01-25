@@ -1,4 +1,4 @@
-package com.pantomim;
+package com.pantomim.Model;
 
 /**
  * Created by aryahm on 1/22/18.

@@ -1,10 +1,13 @@
-package com.pantomim;
+package com.pantomim.Model;
 
 
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.pantomim.Adapter.ChatAdapter;
+import com.pantomim.R;
 
 import java.util.List;
 
@@ -78,7 +81,7 @@ public class User{
     }
 
     public void sendMessage(String message, List<Chat> chats){
-        chats.add(new Chat(name,message));
+        chats.add(0, new Chat(name,message));
         adapter.notifyDataSetChanged();
 
     }
