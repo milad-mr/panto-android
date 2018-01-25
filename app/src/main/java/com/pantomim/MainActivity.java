@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,S
     }
     //For starting
     public void setStartMode(){
-        DialogStart dFragment = new DialogStart ();
+        StartDialog dFragment = new StartDialog();
         dFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         dFragment.show(getSupportFragmentManager(), null);
         dFragment.init(this);

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="SIGNUP"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:background="#000"
+        android:layout_height="1dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="نام کاربری"
+        android:id="@+id/username"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="رمز عبور"
+        android:id="@+id/password"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="ایمیل"
+        android:id="@+id/email"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:id="@+id/signup"
+        android:text="SIGNUP!"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#fff"
+        android:layout_height="wrap_content" />
+</LinearLayout>
