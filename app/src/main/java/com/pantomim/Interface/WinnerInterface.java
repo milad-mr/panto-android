@@ -5,5 +5,5 @@ package com.pantomim.Interface;
  */
 
 public interface WinnerInterface {
-    public void selectWinner(int id);
+    public void selectWinner(String userName);
 }

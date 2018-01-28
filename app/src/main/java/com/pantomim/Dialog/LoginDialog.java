@@ -48,4 +48,8 @@ public class LoginDialog extends DialogFragment {
         });
     }
 
+    public void request(){
+
+    }
+
 }

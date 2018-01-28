@@ -9,9 +9,9 @@ public class Room {
     private String ownername;
     private int max;
     private int current;
-    private int id;
+    private String id;
 
-    public Room(String name, String ownername, int max, int current, int id) {
+    public Room(String name, String ownername, int max, int current, String id) {
         this.name = name;
         this.ownername = ownername;
         this.max = max;
@@ -51,11 +51,11 @@ public class Room {
         this.current = current;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

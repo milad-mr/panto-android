@@ -23,14 +23,6 @@
         android:id="@+id/name"
         android:layout_marginTop="8dp"
         android:layout_height="wrap_content" />
-    <EditText
-        android:layout_width="match_parent"
-        android:hint="حداکثر تعداد"
-        android:id="@+id/count"
-        android:maxLength="2"
-        android:inputType="number"
-        android:layout_marginTop="8dp"
-        android:layout_height="wrap_content" />
     <Button
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"

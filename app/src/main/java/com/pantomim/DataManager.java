@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 
 public class DataManager {
     public static String getBaseUrl(){
-        return "https://harchi";
+        return "http://192.168.21.100:8000";
     }
     public static String getToken(Context context){
         if(context!=null) {

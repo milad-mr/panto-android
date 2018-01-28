@@ -32,6 +32,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         CardView card;
         View view;
+
         public MyViewHolder(View view ) {
             super(view);
             card = (CardView) view.findViewById(R.id.card);
@@ -66,7 +67,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    winner.selectWinner(item.getUserId());
+                    winner.selectWinner(item.getName());
                 }
             });
     }

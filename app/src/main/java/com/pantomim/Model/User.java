@@ -18,19 +18,20 @@ import java.util.List;
 public class User{
 
     private String name;
-    private int userId;
     private ChatAdapter adapter;
     private int score;
+    private Player type;
     private TextView nameText;
     private ImageView microphone;
     private TextView scoreText;
     private boolean isTalking;
 
-    public User(String name, int userId, int score, ChatAdapter adapter) {
+    public User(String name, int score, ChatAdapter adapter,Player type) {
         this.name = name;
-        this.userId = userId;
         this.adapter = adapter;
         this.score = score;
+        this.type = type;
+
     }
 
 
@@ -43,22 +44,13 @@ public class User{
         this.nameText.setText(name);
     }
 
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public int getScore() {
         return score;
     }
 
     public void setScore(int score) {
         this.score = score;
-        this.scoreText.setText(score);
+        this.scoreText.setText(String.valueOf(score));
     }
 
     public void microOn(){
@@ -71,8 +63,19 @@ public class User{
         this.nameText = (TextView) card.findViewById(R.id.name);
         this.microphone = (ImageView) card.findViewById(R.id.microphone);
         this.scoreText = (TextView) card.findViewById(R.id.score);
+        setName(this.name);
+        setScore(this.score);
 
     }
+
+    public Player getType() {
+        return type;
+    }
+
+    public void setType(Player type) {
+        this.type = type;
+    }
+
     public void microOff(){
         if(!isTalking){
             isTalking = false;
@@ -85,4 +88,5 @@ public class User{
         adapter.notifyDataSetChanged();
 
     }
+
 }
