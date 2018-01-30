@@ -140,10 +140,16 @@ public class RoomActivity extends AppCompatActivity implements RoomInterface,Joi
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(response.code()==200) {
-                    Intent intent = new Intent(activity, MainActivity.class);
-                    intent.putExtra("id",String.valueOf(gameId));
-                    intent.putExtra("owner_name",DataManager.getUsername(activity));
-                    activity.startActivity(intent);
+                    for(int i = 0 ; i < rooms.size() ; i++){
+                        if(rooms.get(i).getId().equals(gameId)){
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            intent.putExtra("id",String.valueOf(gameId));
+                            intent.putExtra("owner_name",rooms.get(i).getOwnername());
+                            activity.startActivity(intent);
+                            break;
+                        }
+                    }
+
                 }
                 else
                     Toast.makeText(activity,"Error",Toast.LENGTH_LONG);
