@@ -6,10 +6,8 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.pantomim.Interface.StartInterface;
 import com.pantomim.R;
 
 /**
@@ -22,7 +20,7 @@ public class StartDialog extends DialogFragment {
                              ViewGroup container, Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(
                 R.layout.alert_start, container, false);
-        setCancelable(false);
+        //setCancelable(false);
         return rootView;
     }
 

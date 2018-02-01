@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +82,7 @@ public class RoomActivity extends AppCompatActivity implements RoomInterface,Joi
         addRoom(room);
         Intent intent = new Intent(activity, MainActivity.class);
         intent.putExtra("id",String.valueOf(room.getId()));
+        Log.e("ownerrrrOOp", room.getOwnername());
         intent.putExtra("owner_name",room.getOwnername());
         activity.startActivity(intent);
 
@@ -140,10 +142,18 @@ public class RoomActivity extends AppCompatActivity implements RoomInterface,Joi
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if(response.code()==200) {
-                    Intent intent = new Intent(activity, MainActivity.class);
-                    intent.putExtra("id",String.valueOf(gameId));
-                    intent.putExtra("owner_name",DataManager.getUsername(activity));
-                    activity.startActivity(intent);
+                    for(int i = 0 ; i < rooms.size() ; i++){
+                        if(rooms.get(i).getId().equals(gameId)){
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            intent.putExtra("id",String.valueOf(gameId));
+                            intent.putExtra("owner_name", rooms.get(i).getOwnername());
+                            intent.putExtra("player_type", response.body().getAsJsonObject().get("client num").getAsString()); //not to string
+                           // Log.e("player type", response.body().getAsJsonObject().get("client num").toString());
+                            activity.startActivity(intent);
+                            break;
+                        }
+                    }
+
                 }
                 else
                     Toast.makeText(activity,"Error",Toast.LENGTH_LONG);
