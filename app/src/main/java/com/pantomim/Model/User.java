@@ -83,10 +83,14 @@ public class User{
         }
     }
 
-    public void sendMessage(String message, List<Chat> chats){
-        chats.add(0, new Chat(name,message));
+    public void sendMessage(String message, List<Chat> chats, String sender){
+        //mil
+
+        chats.add(0, new Chat(sender,message));
+
         adapter.notifyDataSetChanged();
 
     }
+
 
 }

@@ -150,7 +150,8 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,W
             @Override
             public void onClick(View v) {
                 if (edit.getText().length() != 0) {
-                    myUser.sendMessage(edit.getText().toString(), chats);
+                    broadcast("guess", edit.getText().toString());
+                   // myUser.addMessage(edit.getText().toString(), chats, );
                     edit.setText("");
                 }
             }
@@ -383,12 +384,33 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,W
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (type.equals("start_game")){
+                if (type.equals("start_game")) {
                     getRequest();
 //                    if(imHost){ todo :shayad bug bokhore
 //                        hostStart();
 //                    }
+                }else if (type.equals("guess")){
+                  //  myUser.sendMessage(edit.getText().toString(), chats); todo :in kar nemikone ke
+                     String msg = "";
+                    try {
+                        msg = data.getString("msg");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    final String src = source;
+                        final String msg2 = msg; //wtfffff this language is fuuuun:)
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                myUser.sendMessage(msg2, chats, src);
+                            }
+                        });
+
+
+                    Log.e("guess", "hads jadid umad");
+                   // adapter.notifyDataSetChanged();
                 }
+
                 if (type.equals("sdp") && dest.equals(myUser.getName())){
                     SessionDescription sdp = null;
                     Log.e("sdp", "sdp found");
@@ -512,6 +534,24 @@ public class MainActivity extends AppCompatActivity implements ChooseInterface,W
 
     }
     //IceCandidate a = new IceCandidate()
+    void broadcast(String type, String msg) {
+        JSONObject json = new JSONObject();
+        JSONObject data = new JSONObject();
+        try {
+            data.put("type", type);
+            data.put("msg", msg);
+            data.put("source", myUser.getName());
+            data.put("dest", "all");
+            json.put("game id", id);
+            json.put("data", data);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        socket.emit("broadcast", json);
+    }
+
+
     void broadcast(String type, String dest, String sdp_mid, int sdp_index, String sdp_desc)  { // for ice condidate
         JSONObject json = new JSONObject();
         JSONObject data = new JSONObject();
